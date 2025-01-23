@@ -1,0 +1,23 @@
+# Ignorar a pasta onde ficam os screenshots e vídeos gerados pelos testes
+cypress/screenshots/
+cypress/videos/
+cypress/downloads/
+cypress/e2e/1-getting-started/
+cypress/e2e/2-advanced-examples/
+cypress/fixtures/example.json
+cypress/support/commands.js
+cypress/support/e2e.js
+
+# Ignorar relatórios de testes (caso estejam configurados)
+cypress/reports/
+
+# Ignorar arquivos de ambiente local (se usados)
+cypress.env.json
+
+# Ignorar pastas/arquivos do Node.js
+node_modules/
+package-lock.json
+
+# Outros arquivos temporários
+.env
+.DS_Store

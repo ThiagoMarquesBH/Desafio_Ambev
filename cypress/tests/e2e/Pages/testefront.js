@@ -28,6 +28,11 @@ class TestFront {
         cy.get('a[data-testid="cadastrarUsuarios"]').click();
     }
 
+    acessarPaginaDeListaUsuarios(){
+        this.dadoQueSejaInseridoLoginESenhaValido();
+        cy.get('a[data-testid="listarUsuarios"]').click();
+    }
+
     cadastraUsuario(){
         const nome = faker.person.firstName();
 
@@ -39,6 +44,15 @@ class TestFront {
 
     verificarCriaçãoDeUsuarios(){
         cy.get('.table').should('be.visible');
+    }
+
+    listarUsuários(){
+        this.acessarPaginaDeListaUsuarios();
+        this.verificarCriaçãoDeUsuarios();
+    }
+
+    verificarUmRegistro(){
+        cy.get('tbody tr').eq(0).find('td').eq(1).should('contain', '.com.br');
     }
 }
 

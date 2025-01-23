@@ -16,8 +16,8 @@ describe('Testes E2E desafio Ambev', () => {
     testefront.verificarCriaçãoDeUsuarios();
   });
 
-  // it('Listar usuários', () => {
-  //   // Navegar até a página de listar usuários
-  //   // Verificar se os usuários estão listados
-  // });
+  it('Listar usuários', () => {
+    testefront.listarUsuários();
+    testefront.verificarUmRegistro();
+  });
 })

@@ -11,11 +11,10 @@ describe('Testes E2E desafio Ambev', () => {
     testefront.entaoOPainelPrincipalEVisualizado();
   })
 
-  // it('Cadastrar novo usuário', () => {
-  //   // Navegue para a página de cadastro.
-  //   // Preencha o formulário com dados válidos.
-  //   // Verifique que o cadastro foi concluído com sucesso.
-  // });
+  it('Cadastrar novo usuário', () => {
+    testefront.fazerOCadastroDeUsuario();
+    testefront.verificarCriaçãoDeUsuarios();
+  });
 
   // it('Listar usuários', () => {
   //   // Navegar até a página de listar usuários

@@ -1,3 +1,5 @@
+import { faker } from '@faker-js/faker';
+
 class TestApi{
     retornarUsariosAdm() {
         return cy.request({
@@ -11,6 +13,21 @@ class TestApi{
             expect(usuario).to.exist;
             return usuario
         });
+    }
+
+    realizarLogin(){
+        return this.retornarUsariosAdm().then((usuario) => {
+            return cy.request({
+                method: 'POST',
+                url: 'https://serverest.dev/login',
+                body: {
+                    email: usuario.email,
+                    password: usuario.password
+                }
+            }).then((respLogin) => {
+                return respLogin.body
+            })
+        })
     }
 
     retornarUsarioPorID() {
@@ -37,10 +54,36 @@ class TestApi{
         });
     }
 
+    cadastrarProduto() {
+        return this.realizarLogin().then((login) => {
+            const nome = faker.person.firstName();
+            const preco = faker.number.int({ min: 10, max: 50 });
+            const qtd = faker.number.int({ min: 10, max: 50 });
+    
+            return cy.request({
+                method: 'POST',
+                url: 'https://serverest.dev/produtos',
+                headers: {
+                    Authorization: login.authorization,
+                },
+                body: {
+                    nome: nome,
+                    preco: preco,
+                    descricao: 'Desafio Thiago',
+                    quantidade: qtd,
+                },
+            });
+        }).then((resposta) => {
+            cy.log('Resposta do cadastro:', resposta.body);
+            return cy.wrap(resposta); 
+        });
+    }
+    
 
-
-
-
+    verificarProdutoProdutoCadastrado(idProduto) {
+        expect(idProduto.status).to.eq(201);
+        expect(idProduto.body.message).to.eq('Cadastro realizado com sucesso');
+    }
 }
 
 export default new TestApi()

@@ -7,10 +7,11 @@ describe('Testes API desafio Ambev', () => {
       });
     })
 
-    // it('Cadastrar novo usuário', () => {
-    //   // Envie uma requisição POST /usuarios com dados válidos.
-    //   // Valide o status 201 e que o novo usuário foi criado.
-    // });
+    it('Cadastrar novo produto', () => {
+      testeapi.cadastrarProduto().then((produto) => {
+        testeapi.verificarProdutoProdutoCadastrado(produto);
+      });
+    })
 
     // it('Realizar login com dados invalidos', () => {
     //   // Envie uma requisição POST /login com credenciais inválidas.

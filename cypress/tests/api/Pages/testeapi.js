@@ -12,6 +12,35 @@ class TestApi{
             return usuario
         });
     }
+
+    retornarUsarioPorID() {
+        return this.retornarUsariosAdm().then((usuario) => {
+            return cy.request({
+                method: 'GET',
+                url: 'https://serverest.dev/usuarios/' + usuario._id,
+            });
+        }).then((resposta) => {
+            return resposta
+        })
+    }
+    
+    validaRetornoUsuárioPorId(resposta) {
+        expect(resposta.status).to.eq(200);
+        expect(resposta.body).to.have.property('nome');
+        cy.log('Nome do usuário:', resposta.body.nome);
+        return this.retornarUsariosAdm().then((usuario) => {
+            expect(resposta.body.nome).to.eq(usuario.nome);
+            expect(resposta.body.email).to.eq(usuario.email);
+            expect(resposta.body.password).to.eq(usuario.password);
+            expect(resposta.body.administrador).to.eq(usuario.administrador);
+            expect(resposta.body._id).to.eq(usuario._id);
+        });
+    }
+
+
+
+
+
 }
 
 export default new TestApi()

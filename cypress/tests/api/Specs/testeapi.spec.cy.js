@@ -13,8 +13,9 @@ describe('Testes API desafio Ambev', () => {
       });
     })
 
-    // it('Realizar login com dados invalidos', () => {
-    //   // Envie uma requisição POST /login com credenciais inválidas.
-    //   // Valide o status 401 e a mensagem de erro retornada.
-    // });
+    it('Realizar login com dados invalidos', () => {
+      testeapi.realizarLogin('goiaba@personalbar.com.br', 'ArrozFeijão').then((login) => {
+        testeapi.validaRetornoLogin(login);
+      });
+    });
   })

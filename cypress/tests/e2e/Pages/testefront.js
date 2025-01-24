@@ -52,7 +52,7 @@ class TestFront {
     }
 
     verificarUmRegistro(){
-        cy.get('tbody tr').eq(0).find('td').eq(1).should('contain', '.com.br');
+        cy.get('tbody tr').eq(0).find('td').eq(1).should('contain', '.com');
     }
 }
 

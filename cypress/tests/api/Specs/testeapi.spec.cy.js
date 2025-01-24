@@ -1,6 +1,10 @@
+import testeapi from "../Pages/testeapi"
+
 describe('Testes API desafio Ambev', () => {
-    it('Buscar todos os usuários cadastrados', () => {
-      cy.request('GET', 'https://serverest.dev/usuarios').its('status').should('equal', 200);
+    it('Buscar usuário por id', () => {
+      testeapi.retornarUsarioPorID().then((resposta) => {
+        testeapi.validaRetornoUsuárioPorId(resposta);
+      });
     })
 
     // it('Cadastrar novo usuário', () => {

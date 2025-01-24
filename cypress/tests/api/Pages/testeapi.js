@@ -15,19 +15,26 @@ class TestApi{
         });
     }
 
-    realizarLogin(){
+    realizarLogin(email = null, senha = null){
         return this.retornarUsariosAdm().then((usuario) => {
+            const userEmail = email || usuario.email;
+            const userPassword = senha || usuario.password;
             return cy.request({
                 method: 'POST',
                 url: 'https://serverest.dev/login',
                 body: {
-                    email: usuario.email,
-                    password: usuario.password
-                }
+                    email: userEmail,
+                    password: userPassword
+                },
+                failOnStatusCode: false,
             }).then((respLogin) => {
                 return respLogin.body
             })
         })
+    }
+
+    validaRetornoLogin(respLogin){
+        expect(respLogin.message).to.eq('Email e/ou senha inválidos');
     }
 
     retornarUsarioPorID() {
